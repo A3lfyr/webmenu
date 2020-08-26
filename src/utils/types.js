@@ -1,8 +1,7 @@
-
-const Link = new (class {
+const Link = new(class {
     constructor(name, url) {
         this.name = name,
-        this.url = url
+            this.url = url
     }
 })();
 

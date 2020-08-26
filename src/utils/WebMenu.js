@@ -1,11 +1,13 @@
-const WebMenu = new (class {
+const DEFAULT_LATITUDE = 48.8588377;
+const DEFAULT_LONGITUDE = 2.2770203;
+const WebMenu = new(class {
     constructor() {
         this.Settings = {
             General: {
                 username: null
             },
             Display: {
-                
+
             },
             Components: {
                 Search: {
@@ -14,8 +16,8 @@ const WebMenu = new (class {
                 },
                 Weather: {
                     enable: true,
-                    latitude: 48.8588377,
-                    longitude: 2.2770203
+                    latitude: DEFAULT_LATITUDE,
+                    longitude: DEFAULT_LONGITUDE
                 },
                 Quote: {
                     enable: true,
@@ -28,6 +30,7 @@ const WebMenu = new (class {
             }
         }
     }
+    // Settings
     loadSettings() {
         this.Settings = JSON.parse(localStorage["Settings"]);
         console.log("[WebMenu] Settings loaded !")
@@ -42,10 +45,12 @@ const WebMenu = new (class {
         document.location.reload(true);
         console.log("[WebMenu] All data erased !")
     }
+    // Background
     refreshBackground() {
         sessionStorage.clear();
         document.location.reload(true);
     }
+    // Dashboard
     getUsername() {
         return this.Settings.General.username;
     }
@@ -54,14 +59,19 @@ const WebMenu = new (class {
         EventManager.sendEvent(EventType.USERNAME_CHANGE, username);
         this.saveSettings();
     }
+    // Weather
     getGPS() {
-        let gps = [this.Settings.Components.Weather.latitude,this.Settings.Components.Weather.longitude]
+        let gps = [this.Settings.Components.Weather.latitude, this.Settings.Components.Weather.longitude]
         return gps;
     }
     setGPS(gps) {
-        this.Settings.Components.Weather.latitude = gps[0];
-        this.Settings.Components.Weather.longitude = gps[1];
-        EventManager.sendEvent(EventType.WEATHER_GPS_CHANGE, gps);
+        let latitude = gps[0];
+        if (latitude == null) latitude = DEFAULT_LATITUDE;
+        let longitude = gps[0];
+        if (longitude == null) longitude = DEFAULT_LONGITUDE
+        this.Settings.Components.Weather.latitude = latitude;
+        this.Settings.Components.Weather.longitude = longitude;
+        EventManager.sendEvent(EventType.WEATHER_GPS_CHANGE, [latitude, longitude]);
         this.saveSettings();
     }
     getSearchEngine() {
@@ -72,6 +82,7 @@ const WebMenu = new (class {
         EventManager.sendEvent(EventType.SEARCHENGINE_CHANGE, searchEngine);
         this.saveSettings();
     }
+    // Quotes
     getQuoteSource() {
         return this.Settings.Components.Search.engine;
     }

@@ -1,3 +1,0 @@
-Erreur checkbox lié pas au bon trucs => Pas update de la valeur du checkbox quand changement (event)
-Erreur lorsqu'aucun background n'a été trouvé via le thème précisé => Mettre un background par défaut ?
-non update du message lors du changement de tranche d'heure :3

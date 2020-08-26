@@ -2,11 +2,10 @@ var vue_welcomeMessage = new Vue({
     el: '#vue_settings',
     data: {
         activePage: "Dashboard",
-        Category: [
-            {
+        Category: [{
                 name: "General",
                 Pages: [
-                    "Dashboard", "Recherches", "Données locales"
+                    "Dashboard", "Données locales"
                 ]
             },
             {
@@ -18,7 +17,7 @@ var vue_welcomeMessage = new Vue({
             {
                 name: "Modules",
                 Pages: [
-                    "Météo", "Citation"
+                    "Recherches", "Météo", "Citation"
                 ]
             },
             {
@@ -31,7 +30,7 @@ var vue_welcomeMessage = new Vue({
         ]
     },
     methods: {
-        changeActivePage: function(newPageName){
+        changeActivePage: function (newPageName) {
             this.activePage = newPageName;
         },
         onEvent: function (type, data) {
@@ -65,15 +64,17 @@ var vue_welcomeMessage = new Vue({
                     break;
             }
         },
+        // Dashboard
         setUsername(name) {
             WebMenu.setUsername(name);
         },
         getUsername() {
             return WebMenu.getUsername();
         },
+        // Search
         setSearchEngine(searchEngineName) {
             for (let [key, value] of Object.entries(SearchEngine)) {
-                if(searchEngineName == value.name) {  
+                if (searchEngineName == value.name) {
                     WebMenu.setSearchEngine(value);
                 }
             }
@@ -84,10 +85,10 @@ var vue_welcomeMessage = new Vue({
         getSearchEngineName() {
             return WebMenu.getSearchEngine().name;
         },
-        ///
+        // Quotes
         setQuoteSource(QuoteSourceName) {
             for (let [key, value] of Object.entries(QuoteSource)) {
-                if(QuoteSourceName == value.name) {  
+                if (QuoteSourceName == value.name) {
                     WebMenu.setQuoteSource(value);
                 }
             }
@@ -97,6 +98,21 @@ var vue_welcomeMessage = new Vue({
         },
         getQuoteSourceName() {
             return WebMenu.getQuoteSource().name;
+        },
+        // Weather
+        getLatitude: function () {
+            let GPS = WebMenu.getGPS();
+            let latitude = GPS[0]
+            return latitude;
+        },
+        setLatitude: function (newLatitude) {
+            WebMenu.setGPS(newLatitude, this.getLongitude);
+        },
+        getLongitude: function () {
+            return WebMenu.getGPS()[1];
+        },
+        setLongitude: function (newLongitude) {
+            WebMenu.setGPS(this.getLatitude, newLongitude);
         },
     },
     created() {
