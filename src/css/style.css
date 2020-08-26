@@ -16,9 +16,17 @@
     /* version standardisée */
 }
 
-body::-webkit-scrollbar { width: 0 !important }
-body { overflow: -moz-scrollbars-none; }
-body { -ms-overflow-style: none; }
+body::-webkit-scrollbar {
+    width: 0 !important
+}
+
+body {
+    overflow: -moz-scrollbars-none;
+}
+
+body {
+    -ms-overflow-style: none;
+}
 
 @import url('https://fonts.googleapis.com/css2?family=Titillium+Web&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400&display=swap');
@@ -125,6 +133,15 @@ body { -ms-overflow-style: none; }
     color: var(--main-text-color);
     font-family: 'Titillium Web', sans-serif;
     font-weight: 300;
+}
+
+a {
+    color: #FF8552;
+}
+
+a:hover,
+a:focus {
+    color: #c24a16;
 }
 
 
@@ -261,12 +278,14 @@ a.navbar-item:hover {
     margin-right: 0.3em;
 }
 
+#wIcon {
+    margin-right: .4em;
+}
 
 
 
 
-
-/* SETTINGS v2 */  
+/* SETTINGS v2 */
 .closebtn {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
@@ -277,9 +296,9 @@ a.navbar-item:hover {
     top: 0;
     right: 25px;
     font-size: 36px;
-  }
-  
-#vue_settings  {
+}
+
+#vue_settings {
     width: 0px;
     position: fixed;
     z-index: 1;
@@ -292,7 +311,7 @@ a.navbar-item:hover {
     color: var(--main-text-color);
     display: none;
     border-radius: 1em;
-  }
+}
 
 .sidepanel-active {
     display: block;
@@ -306,6 +325,7 @@ a.navbar-item:hover {
 .menu-list a {
     color: var(--main-text-color);
 }
+
 .menu-list a:hover {
     background-color: transparent;
     color: var(--text-lighter-color);

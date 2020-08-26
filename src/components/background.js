@@ -11,13 +11,13 @@ var vue_background = new Vue({
     methods: {
         getBackgroundImage: function () {
             if (sessionStorage["bg_url"] !== undefined && sessionStorage["bg_link"] !== undefined && sessionStorage["bg_author"] !== undefined) {
-                
+
                 this.backgroundImage.url = sessionStorage["bg_url"];
                 this.backgroundImage.link = sessionStorage["bg_link"];
                 this.backgroundImage.author = sessionStorage["bg_author"];
                 this.changeBackground();
             } else {
-                fetch("https://api.unsplash.com/photos/random?query=" + this.theme + "&collections=9941171&orientation=landscape&client_id=FVuyJtYxc_o9usr0a9_e_t1fR7dwHPWIgGgEzBErJGE")
+                fetch("https://api.unsplash.com/photos/random?query=" + this.theme + "&collections=10571039&orientation=landscape&client_id=FVuyJtYxc_o9usr0a9_e_t1fR7dwHPWIgGgEzBErJGE")
                     .then(result => {
                         return result.json();
                     })
@@ -32,9 +32,9 @@ var vue_background = new Vue({
                     })
                     .catch(console.error)
             }
-            
+
         },
-        changeBackground: function() {
+        changeBackground: function () {
             document.getElementById("main").style.background = "url(" + this.backgroundImage.url + ") no-repeat center fixed";
             document.getElementById("main").style.backgroundSize = "cover";
         },
@@ -46,7 +46,7 @@ var vue_background = new Vue({
                     break;
             }
         },
-        refreshBackground: function() {
+        refreshBackground: function () {
             sessionStorage.clear();
             document.location.reload(true);
         },
