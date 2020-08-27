@@ -84,7 +84,7 @@ const WebMenu = new(class {
     }
     // Quotes
     getQuoteSource() {
-        return this.Settings.Components.Search.engine;
+        return this.Settings.Components.Quote.source;
     }
     setQuoteSource(source) {
         this.Settings.Components.Quote.source = source;
