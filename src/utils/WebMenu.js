@@ -65,10 +65,10 @@ const WebMenu = new(class {
         return gps;
     }
     setGPS(gps) {
-        let latitude = gps[0];
-        if (latitude == null) latitude = DEFAULT_LATITUDE;
-        let longitude = gps[0];
-        if (longitude == null) longitude = DEFAULT_LONGITUDE
+        var latitude = gps[0];
+        if (latitude == "") latitude = DEFAULT_LATITUDE.toString();
+        var longitude = gps[1];
+        if (longitude == "") longitude = DEFAULT_LONGITUDE.toString();
         this.Settings.Components.Weather.latitude = latitude;
         this.Settings.Components.Weather.longitude = longitude;
         EventManager.sendEvent(EventType.WEATHER_GPS_CHANGE, [latitude, longitude]);

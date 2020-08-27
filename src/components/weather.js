@@ -56,8 +56,8 @@ var vue_weather = new Vue({
                     } else { // sun
                         state = "fa-sun";
                     }
-                    
-                    if(document.getElementById("weatherIcon")){
+
+                    if (document.getElementById("weatherIcon")) {
                         document.getElementById("weatherIcon").remove();
                     }
 
@@ -73,8 +73,10 @@ var vue_weather = new Vue({
                 })
                 .catch(console.error)
         },
-        getGPS: function() {
+        getGPS: function () {
             let gps = WebMenu.getGPS();
+            console.log("getGPS:");
+            console.log(gps)
             this.latitude = gps[0];
             this.longitude = gps[1];
         },
@@ -86,23 +88,23 @@ var vue_weather = new Vue({
                         this.getWeather();
                     }
                     break;
-    
+
                 case EventType.WEATHER_GPS_CHANGE:
-                    let GPS = data.split('|');
+                    let GPS = data;
                     this.latitude = GPS[0];
                     this.longitude = GPS[1];
-                    if (this.enable == true)  {
+                    if (this.enable == true) {
                         this.getWeather();
                     }
                     break;
             }
         }
     },
-    created() {        
+    created() {
         EventManager.subscribe(this);
         this.getGPS();
         if (this.enable == true) {
-            this.getWeather(); 
+            this.getWeather();
         }
     }
 });

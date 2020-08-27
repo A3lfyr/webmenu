@@ -106,13 +106,13 @@ var vue_welcomeMessage = new Vue({
             return latitude;
         },
         setLatitude: function (newLatitude) {
-            WebMenu.setGPS(newLatitude, this.getLongitude);
+            WebMenu.setGPS([newLatitude, this.getLongitude()]);
         },
         getLongitude: function () {
             return WebMenu.getGPS()[1];
         },
         setLongitude: function (newLongitude) {
-            WebMenu.setGPS(this.getLatitude, newLongitude);
+            WebMenu.setGPS([this.getLatitude(), newLongitude]);
         },
     },
     created() {
