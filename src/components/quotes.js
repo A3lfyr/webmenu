@@ -11,23 +11,23 @@ var vue_welcomeMessage = new Vue({
     },
     methods: {
         getRandomQuote: function () {
-            fetch("http://kaamelott.reiter.tf/api/random")
-            .then(result => {
-                return result.json();
-            })
-            .then(data => {
-                this.quote.text = data.citation;
-                this.quote.personnage = data.infos.personnage;
-                this.quote.saison = data.infos.saison;
-                this.quote.episode = data.infos.episode;
-            })
-            .catch(console.error)
+            fetch("https://kaamelott.reiter.tf/api/random")
+                .then(result => {
+                    return result.json();
+                })
+                .then(data => {
+                    this.quote.text = data.citation;
+                    this.quote.personnage = data.infos.personnage;
+                    this.quote.saison = data.infos.saison;
+                    this.quote.episode = data.infos.episode;
+                })
+                .catch(console.error)
         },
         onEvent: function (type, data) {
             switch (type) {
                 case EventType.QUOTE_TOGGLE:
                     this.enable = data;
-                    if(this.enable == true) {
+                    if (this.enable == true) {
                         this.getRandomQuote();
                     }
                     break;
