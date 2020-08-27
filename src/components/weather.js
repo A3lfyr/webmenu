@@ -75,8 +75,6 @@ var vue_weather = new Vue({
         },
         getGPS: function () {
             let gps = WebMenu.getGPS();
-            console.log("getGPS:");
-            console.log(gps)
             this.latitude = gps[0];
             this.longitude = gps[1];
         },
