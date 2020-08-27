@@ -41,5 +41,13 @@ function getHour(time) {
     return time.split(":")[0];
 }
 
-
-
+function toogleSettings() {
+    var div = document.getElementById("vue_settings");
+    if (div.style.width == "500px") {
+        div.style.display = "none"
+        div.style.width = 0;
+    } else {
+        div.style.width = "500px";
+        div.style.display = "block";
+    }
+}
