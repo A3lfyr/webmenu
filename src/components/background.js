@@ -17,7 +17,7 @@ var vue_background = new Vue({
                 this.backgroundImage.author = sessionStorage["bg_author"];
                 this.changeBackground();
             } else {
-                fetch("https://arthur-reiter.github.io/webmenu/src/utils/backgrounds.json")
+                fetch("/src/utils/backgrounds.json")
                     .then(result => {
                         console.log(result)
                         return result.json();
