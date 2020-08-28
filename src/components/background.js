@@ -39,21 +39,6 @@ var vue_background = new Vue({
                         this.changeBackground();
                     })
                     .catch(console.error)
-
-                /*fetch("https://api.unsplash.com/photos/random?query=" + this.theme + "&collections=10571039&orientation=landscape&client_id=FVuyJtYxc_o9usr0a9_e_t1fR7dwHPWIgGgEzBErJGE")
-                    .then(result => {
-                        return result.json();
-                    })
-                    .then(data => {
-                        this.backgroundImage.url = data.urls.regular;
-                        this.backgroundImage.link = data.links.html;
-                        this.backgroundImage.author = data.user.name;
-                        sessionStorage["bg_url"] = this.backgroundImage.url;
-                        sessionStorage["bg_link"] = this.backgroundImage.link;
-                        sessionStorage["bg_author"] = this.backgroundImage.author;
-                        this.changeBackground();
-                    })
-                    .catch(console.error)*/
             }
 
         },
