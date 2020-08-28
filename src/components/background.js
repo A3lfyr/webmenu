@@ -6,7 +6,7 @@ var vue_background = new Vue({
             link: null,
             author: null
         },
-        theme: null
+        theme: null,
     },
     methods: {
         getBackgroundImage: function () {
@@ -17,7 +17,30 @@ var vue_background = new Vue({
                 this.backgroundImage.author = sessionStorage["bg_author"];
                 this.changeBackground();
             } else {
-                fetch("https://api.unsplash.com/photos/random?query=" + this.theme + "&collections=10571039&orientation=landscape&client_id=FVuyJtYxc_o9usr0a9_e_t1fR7dwHPWIgGgEzBErJGE")
+                fetch("/src/utils/backgrounds.json")
+                    .then(result => {
+                        console.log(result)
+                        return result.json();
+                    })
+                    .then(backgroundsArray => {
+                        const nbBackgrounds = backgroundsArray.length;
+                        let randomID = Math.floor(Math.random() * nbBackgrounds);
+                        let randomBackground = backgroundsArray[randomID];
+
+                        console.log("Background Choose : ");
+                        console.log(randomBackground);
+
+                        this.backgroundImage.url = randomBackground.url;
+                        this.backgroundImage.link = randomBackground.link;
+                        this.backgroundImage.author = randomBackground.user;
+                        sessionStorage["bg_url"] = this.backgroundImage.url;
+                        sessionStorage["bg_link"] = this.backgroundImage.link;
+                        sessionStorage["bg_author"] = this.backgroundImage.author;
+                        this.changeBackground();
+                    })
+                    .catch(console.error)
+
+                /*fetch("https://api.unsplash.com/photos/random?query=" + this.theme + "&collections=10571039&orientation=landscape&client_id=FVuyJtYxc_o9usr0a9_e_t1fR7dwHPWIgGgEzBErJGE")
                     .then(result => {
                         return result.json();
                     })
@@ -30,7 +53,7 @@ var vue_background = new Vue({
                         sessionStorage["bg_author"] = this.backgroundImage.author;
                         this.changeBackground();
                     })
-                    .catch(console.error)
+                    .catch(console.error)*/
             }
 
         },

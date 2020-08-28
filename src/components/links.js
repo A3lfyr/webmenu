@@ -1,4 +1,4 @@
-var vue_links = new Vue({
+/*var vue_links = new Vue({
     el: '#links',
     data: {
         enable: false,
@@ -28,4 +28,4 @@ var vue_links = new Vue({
     created() {
         EventManager.subscribe(this);
     }
-});
+});*/
