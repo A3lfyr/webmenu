@@ -1,29 +1,34 @@
 <!DOCTYPE html>
 <html id="bg">
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Menu Web</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
-  <link rel="stylesheet" href="src/css/animate.css">
-  <link rel="stylesheet" href="src/css/style.css">
-  <script src="https://kit.fontawesome.com/269b5f41a7.js" crossorigin="anonymous"></script>
-  <!-- development version, includes helpful console warnings -->
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <!-- production version, optimized for size and speed --
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Menu Web</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css"
+    />
+    <link rel="stylesheet" href="src/css/animate.css" />
+    <link rel="stylesheet" href="src/css/style.css" />
+    <script
+      src="https://kit.fontawesome.com/269b5f41a7.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- production version, optimized for size and speed --
   <script src="https://cdn.jsdelivr.net/npm/vue"></script>-->
-</head>
+  </head>
 
-<body>
-  <div id="app">
-    <section class="hero has-background-image is-fullheight" id="main">
-      <!-- Navbar -->
-      <div class="hero-head">
-        <header class="navbar">
-          <div class="container">
-            <div class="navbar-brand">
-              <!--
+  <body>
+    <div id="app">
+      <section class="hero has-background-image is-fullheight" id="main">
+        <!-- Navbar -->
+        <div class="hero-head">
+          <header class="navbar">
+            <div class="container">
+              <div class="navbar-brand">
+                <!--
               <div class="navbar-item has-dropdown is-hoverable" id="links" v-if="enable == true">
                 <a class="navbar-link">
                   Favoris
@@ -41,212 +46,317 @@
                 </div>
               </div>
               -->
-              <span class="navbar-item">
-                <form id="search" method="GET" v-bind:action="searchEngineUrl" v-if="enable == true">
-                  <div class="field">
-                    <p class="control has-icons-left">
-                      <input name="q" class="input is-rounded" type="text" id="googleSearch"
-                        v-bind:placeholder="'Search on '+searchEngineName">
-                      <span class="icon is-small is-left">
-                        <i class="fas fa-search"></i>
-                      </span>
-                    </p>
+                <span class="navbar-item">
+                  <form
+                    id="search"
+                    method="GET"
+                    v-bind:action="searchEngineUrl"
+                    v-if="enable == true"
+                  >
+                    <div class="field">
+                      <p class="control has-icons-left">
+                        <input
+                          autofocus
+                          name="q"
+                          class="input is-rounded"
+                          type="text"
+                          id="googleSearch"
+                          v-bind:placeholder="'Rechercher sur '+searchEngineName"
+                        />
+                        <span class="icon is-small is-left">
+                          <i class="fas fa-search"></i>
+                        </span>
+                      </p>
+                    </div>
+                  </form>
+                </span>
+              </div>
+              <div id="navbarMenuHeroC" class="navbar-menu">
+                <div class="navbar-end animated fadeIn">
+                  <div class="navbar-item" id="weather" v-if="enable == true">
+                    <span id="wIcon"></span> {{ temperature }}{{ unite }}
                   </div>
-                </form>
+                </div>
+              </div>
+            </div>
+          </header>
+        </div>
+
+        <!-- Title & Message -->
+        <div class="hero-body" id="mainText">
+          <div class="container has-text-centered animated fadeIn">
+            <h1 class="title" id="time">{{ time }}</h1>
+            <h2 class="subtitle" id="welcomeMessage">{{ message }}</h2>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="hero-foot">
+          <div class="citationBox animated fadeIn" id="quotes">
+            <p class="quote">{{ quote.text }}</p>
+            -
+            <i class="quoteCredit"
+              >{{ quote.personnage }}, {{ quote.saison }} épisode {{
+              quote.episode }}</i
+            >
+          </div>
+          <div class="creditBox" id="backgroundCredits">
+            <div id="settingButton">
+              <i
+                class="fas fa-cog"
+                onclick="toogleSettings()"
+                id="optionCog"
+              ></i
+              ><br />
+            </div>
+            Photo par
+            <a target="_blank" v-bind:href="backgroundImage.link"
+              >{{ backgroundImage.author }}</a
+            >
+            /
+            <a
+              target="_blank"
+              href="https://unsplash.com/?utm_source=urn:ietf:wg:oauth:2.0:oob&utm_medium=referral"
+              >Unsplash</a
+            >
+          </div>
+          <div class="rightBox"></div>
+        </div>
+      </section>
+
+      <!-- Settings -->
+      <div id="vue_settings">
+        <a href="javascript:void(0)" class="closebtn" onclick="toogleSettings()"
+          >×</a
+        >
+        <div class="columns">
+          <div class="column is-one-third">
+            <aside class="menu">
+              <span v-for="Cat in Category">
+                <p class="menu-label" style="margin: 6px 0 0 0">
+                  {{ Cat.name }}
+                </p>
+                <ul class="menu-list">
+                  <li v-for="Pagename in Cat.Pages">
+                    <a
+                      id="module-button"
+                      class="is-active"
+                      v-if="Pagename == activePage"
+                      >{{ Pagename }}</a
+                    >
+                    <a
+                      id="module-button"
+                      v-else
+                      v-on:click="changeActivePage(Pagename)"
+                      >{{ Pagename }}</a
+                    >
+                  </li>
+                </ul>
               </span>
+            </aside>
+          </div>
+          <div class="column">
+            <h4 class="title">{{activePage}}</h4>
+            <!-- Apparence > Background -->
+            <div v-if="activePage === 'Background'">
+              <button
+                class="button is-danger is-small is-rounded"
+                onclick="WebMenu.refreshBackground()"
+              >
+                Charger un nouveau background
+              </button>
             </div>
-            <div id="navbarMenuHeroC" class="navbar-menu">
-              <div class="navbar-end animated fadeIn">
-                <div class="navbar-item" id="weather" v-if="enable == true">
-                  <span id="wIcon"></span> {{ temperature }}{{ unite }}
-                </div>
+            <!-- Modules > Favoris -->
+            <div v-else-if="activePage === 'Favoris'">
+              <label class="label">
+                <input
+                  v-on:change="setLinksDisplay(false)"
+                  v-if="getLinksDisplay() == true"
+                  type="checkbox"
+                  class="onoff"
+                  checked
+                />
+                <input
+                  v-on:change="setLinksDisplay(true)"
+                  v-else
+                  type="checkbox"
+                  class="onoff"
+                  disabled
+                />
+                Afficher
+              </label>
+              <div class="notification is-warning">
+                Ce module est actuellement en développement. Il sera disponible
+                dans les prochaines versions.
               </div>
             </div>
-          </div>
-        </header>
-      </div>
-
-      <!-- Title & Message -->
-      <div class="hero-body" id="mainText">
-        <div class="container has-text-centered animated fadeIn">
-          <h1 class="title " id="time">
-            {{ time }}
-          </h1>
-          <h2 class="subtitle " id="welcomeMessage">
-            {{ message }}
-          </h2>
-        </div>
-      </div>
-
-      <!-- Footer -->
-      <div class="hero-foot">
-        <div class="citationBox animated fadeIn" id="quotes">
-          <p class="quote">{{ quote.text }}</p>
-          - <i class="quoteCredit">{{ quote.personnage }}, {{ quote.saison }} épisode {{ quote.episode }}</i>
-        </div>
-        <div class="creditBox" id="backgroundCredits">
-          <div id="settingButton">
-            <i class="fas fa-cog" onclick="toogleSettings()" id="optionCog"></i><br>
-          </div>
-          Photo by <a target="_blank" v-bind:href="backgroundImage.link">{{ backgroundImage.author }}</a>
-          / <a target="_blank"
-            href="https://unsplash.com/?utm_source=urn:ietf:wg:oauth:2.0:oob&utm_medium=referral">Unsplash</a>
-        </div>
-        <div class="rightBox">
-        </div>
-      </div>
-    </section>
-
-    <!-- Settings -->
-    <div id="vue_settings">
-      <a href="javascript:void(0)" class="closebtn" onclick="toogleSettings()">×</a>
-      <div class="columns">
-        <div class="column is-one-third">
-          <aside class="menu">
-            <span v-for="Cat in Category">
-              <p class="menu-label" style="margin: 6px 0 0 0;">
-                {{ Cat.name }}
+            <!-- Modules > Citation -->
+            <div v-else-if="activePage === 'Citation'">
+              <div class="select">
+                <select
+                  id="selectQuote"
+                  v-on:change="setQuoteSource($event.srcElement.value)"
+                  v-bind:value="getQuoteSourceName()"
+                >
+                  <option
+                    v-for="source in this.getQuoteSourceList()"
+                    v-bind:value="source[1].name"
+                  >
+                    {{source[1].name}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <!-- Modules > Weather -->
+            <div v-else-if="activePage=== 'Météo'">
+              <label class="label">Coordonnées GPS</label>
+              <div class="field-body">
+                <div class="field">
+                  <div class="control">
+                    <input
+                      class="input"
+                      v-on:change="setLatitude($event.srcElement.value)"
+                      v-bind:value="getLatitude()"
+                      type="text"
+                      placeholder="Latitude"
+                    />
+                  </div>
+                </div>
+                <div class="field">
+                  <div class="control">
+                    <input
+                      class="input"
+                      v-on:change="setLongitude($event.srcElement.value)"
+                      v-bind:value="getLongitude()"
+                      type="text"
+                      placeholder="Longitude"
+                    />
+                  </div>
+                </div>
+              </div>
+              <p>
+                Par défault les coordonnées correspondent à celle de la ville de
+                Paris
               </p>
-              <ul class="menu-list">
-                <li v-for="Pagename in Cat.Pages">
-                  <a id="module-button" class="is-active" v-if="Pagename == activePage">{{ Pagename }}</a>
-                  <a id="module-button" v-else v-on:click="changeActivePage(Pagename)">{{ Pagename }}</a>
+            </div>
+            <!-- Credits > Développement -->
+            <div v-else-if="activePage === 'Développement'">
+              <p>
+                Cette application est développé par
+                <a href="http://reiter.tf">Arthur REITER</a>. La documentation
+                est disponible sur
+                <a href="https://github.com/arthur-reiter/webmenu">github</a>.
+              </p>
+              <br />
+              Merci à <a href="https://github.com/lacaulac">lacaulac</a> pour
+              son aide durant le développement.
+            </div>
+            <!-- Credits > API -->
+            <div v-else-if="activePage === 'API'">
+              Liste des API utilisées :
+              <ul>
+                <li>
+                  Météo :
+                  <a target="_blank" href="https://www.infoclimat.fr/"
+                    >infoclimat</a
+                  >
                 </li>
-
+                <li>
+                  Fond d'écran :
+                  <a target="_blank" href="https://unsplash.com/">Unsplash</a>
+                </li>
+                <li>
+                  Citations de Kaamelott :
+                  <a target="_blank" href="http://Kaamelott.reiter.tf"
+                    >Kaamelott API</a
+                  >
+                </li>
               </ul>
-            </span>
-          </aside>
-        </div>
-        <div class="column">
-          <h4 class="title">{{activePage}}</h4>
-          <!-- Apparence > Background -->
-          <div v-if="activePage === 'Background'">
-
-            <button class="button is-danger is-small is-rounded" onclick="WebMenu.refreshBackground()">Charger un
-              nouveau background</button>
-          </div>
-          <!-- Modules > Favoris -->
-          <div v-else-if="activePage === 'Favoris'">
-
-            <label class="label">
-              <input v-on:change="setLinksDisplay(false)" v-if="getLinksDisplay() == true" type="checkbox" class="onoff"
-                checked>
-              <input v-on:change="setLinksDisplay(true)" v-else type="checkbox" class="onoff" disabled>
-              Afficher
-            </label>
-            <div class="notification is-warning">
-              Ce module est actuellement en développement. Il sera disponible dans les prochaines versions.
             </div>
+            <!-- General > Données Locales -->
+            <div v-else-if="activePage === 'Données locales'">
+              <p>
+                Toutes les données sont stockées localement sur votre
+                navigateur. Seules les requêtes au différentes APIs transitent
+                via internet
+              </p>
+              <br />
+              <p>
+                Vous pouvez à tout moment supprimer toutes les données stockées
+                localement.
+              </p>
+              <br />
 
-          </div>
-          <!-- Modules > Citation -->
-          <div v-else-if="activePage === 'Citation'">
-            <div class="select">
-              <select id="selectQuote" v-on:change="setQuoteSource($event.srcElement.value)"
-                v-bind:value="getQuoteSourceName()">
-                <option v-for="source in this.getQuoteSourceList()" v-bind:value="source[1].name">{{source[1].name}}
-                </option>
-              </select>
+              <button
+                class="button is-danger is-small is-rounded"
+                onclick="WebMenu.eraseData()"
+              >
+                Supprimer les données
+              </button>
             </div>
-          </div>
-          <!-- Modules > Weather -->
-          <div v-else-if="activePage=== 'Météo'">
-            <label class="label">Coordonnées GPS</label>
-            <div class="field-body">
+            <!-- General > Recherches -->
+            <div v-else-if="activePage === 'Recherches'">
+              <div id="selectSearch" class="select">
+                <select
+                  v-on:change="setSearchEngine($event.srcElement.value)"
+                  v-bind:value="getSearchEngineName()"
+                >
+                  <option
+                    v-for="engine in this.getSearchEngineList()"
+                    v-bind:value="engine[1].name"
+                  >
+                    {{engine[1].name}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <!-- General > DashBoard -->
+            <div v-else-if="activePage=== 'Dashboard'">
               <div class="field">
+                <label class="label">Nom</label>
                 <div class="control">
-                  <input class="input" v-on:change="setLatitude($event.srcElement.value)" v-bind:value="getLatitude()"
-                    type="text" placeholder="Latitude">
+                  <input
+                    class="input"
+                    v-on:change="setUsername($event.srcElement.value)"
+                    v-bind:value="getUsername()"
+                    type="text"
+                    placeholder="Votre nom"
+                  />
                 </div>
-              </div>
-              <div class="field">
-                <div class="control">
-                  <input class="input" v-on:change="setLongitude($event.srcElement.value)" v-bind:value="getLongitude()"
-                    type="text" placeholder="Longitude">
-                </div>
+                <p class="help">
+                  Votre nom sera affiché sur la page principale
+                </p>
               </div>
             </div>
-            <p>Par défault les coordonnées correspondent à celle de la ville de Paris</p>
+            <div v-else></div>
           </div>
-          <!-- Credits > Développement -->
-          <div v-else-if="activePage === 'Développement'">
-            <p>
-              Cette application est développé par <a href="http://reiter.tf">Arthur REITER</a>.
-              La documentation est disponible sur <a href="https://github.com/arthur-reiter/webmenu">github</a>.
-            </p>
-            <br>
-            Merci à <a href="https://github.com/lacaulac">lacaulac</a> pour son aide durant le développement.
-          </div>
-          <!-- Credits > API -->
-          <div v-else-if="activePage === 'API'">
-            Liste des API utilisées :
-            <ul>
-              <li>Météo : <a target="_blank" href="https://www.infoclimat.fr/">infoclimat</a></li>
-              <li>Fond d'écran : <a target="_blank" href="https://unsplash.com/">Unsplash</a></li>
-              <li>Citations de Kaamelott : <a target="_blank" href="http://Kaamelott.reiter.tf">Kaamelott API</a></li>
-            </ul>
-          </div>
-          <!-- General > Données Locales -->
-          <div v-else-if="activePage === 'Données locales'">
-
-            <p>Toutes les données sont stockées localement sur votre navigateur.
-              Seules les requêtes au différentes APIs transitent via internet</p><br>
-            <p>Vous pouvez à tout moment supprimer toutes les données stockées localement.</p><br>
-
-            <button class="button is-danger is-small is-rounded" onclick="WebMenu.eraseData()">Supprimer les
-              données</button>
-          </div>
-          <!-- General > Recherches -->
-          <div v-else-if="activePage === 'Recherches'">
-            <div id="selectSearch" class="select">
-              <select v-on:change="setSearchEngine($event.srcElement.value)" v-bind:value="getSearchEngineName()">
-                <option v-for="engine in this.getSearchEngineList()" v-bind:value="engine[1].name">{{engine[1].name}}
-                </option>
-              </select>
-            </div>
-          </div>
-          <!-- General > DashBoard -->
-          <div v-else-if="activePage=== 'Dashboard'">
-            <div class="field">
-              <label class="label">Nom</label>
-              <div class="control">
-                <input class="input" v-on:change="setUsername($event.srcElement.value)" v-bind:value="getUsername()"
-                  type="text" placeholder="Votre nom">
-              </div>
-              <p class="help">Votre nom sera affiché sur la page principale</p>
-            </div>
-          </div>
-          <div v-else></div>
         </div>
       </div>
     </div>
 
-  </div>
+    <!-- Import Utils -->
+    <script src="src/utils/types.js"></script>
+    <script src="src/utils/EventManager.js"></script>
+    <script src="src/utils/WebMenu.js"></script>
+    <script src="src/utils/functions.js"></script>
 
-  <!-- Import Utils -->
-  <script src="src/utils/types.js"></script>
-  <script src="src/utils/EventManager.js"></script>
-  <script src="src/utils/WebMenu.js"></script>
-  <script src="src/utils/functions.js"></script>
+    <!-- Import/Create Settings -->
+    <script>
+      if (localStorage["Settings"] !== undefined) {
+        WebMenu.loadSettings();
+      } else {
+        WebMenu.saveSettings();
+      }
+    </script>
 
-  <!-- Import/Create Settings -->
-  <script>
-    if (localStorage["Settings"] !== undefined) {
-      WebMenu.loadSettings();
-    } else {
-      WebMenu.saveSettings();
-    }
-  </script>
-
-  <!-- Import Vues -->
-  <script src="src/components/links.js"></script>
-  <script src="src/components/weather.js"></script>
-  <script src="src/components/quotes.js"></script>
-  <script src="src/components/background.js"></script>
-  <script src="src/components/time.js"></script>
-  <script src="src/components/vue_showWelcomeMessage.js"></script>
-  <script src="src/components/search.js"></script>
-  <script src="src/components/vue_settings.js"></script>
-</body>
-
+    <!-- Import Vues -->
+    <script src="src/components/links.js"></script>
+    <script src="src/components/weather.js"></script>
+    <script src="src/components/quotes.js"></script>
+    <script src="src/components/background.js"></script>
+    <script src="src/components/time.js"></script>
+    <script src="src/components/vue_showWelcomeMessage.js"></script>
+    <script src="src/components/search.js"></script>
+    <script src="src/components/vue_settings.js"></script>
+  </body>
 </html>
