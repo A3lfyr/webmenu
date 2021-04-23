@@ -26,6 +26,7 @@ var vue_search = new Vue({
     },
     created() {
         this.getSearchEngine(null);
+        this.enable = WebMenu.getToogleComponent('search');
         EventManager.subscribe(this);
     }
 });

@@ -24,7 +24,7 @@
           <div class="container">
             <div class="navbar-brand">
               <!--
-              <div class="navbar-item has-dropdown is-hoverable" id="links" v-if="enable == true">
+              <div class="navbar-item has-dropdown is-hoverable" id="links">
                 <a class="navbar-link">
                   Favoris
                 </a>
@@ -42,7 +42,7 @@
               </div>
               -->
               <span class="navbar-item">
-                <form id="search" method="GET" v-bind:action="searchEngineUrl" v-if="enable == true">
+                <form id="search" method="GET" v-bind:action="searchEngineUrl" v-if="enable">
                   <div class="field">
                     <p class="control has-icons-left">
                       <input autofocus name="q" class="input is-rounded" type="text" id="googleSearch"
@@ -56,8 +56,8 @@
               </span>
             </div>
             <div id="navbarMenuHeroC" class="navbar-menu">
-              <div class="navbar-end animated fadeIn">
-                <div class="navbar-item" id="weather" v-if="enable == true">
+              <div class="navbar-end">
+                <div class="navbar-item animated fadeIn" id="weather" v-if="enable">
                   <span id="wIcon"></span> {{ temperature }}{{ unite }}
                 </div>
               </div>
@@ -69,18 +69,18 @@
       <!-- Title & Message -->
       <div class="hero-body" id="mainText">
         <div class="container has-text-centered animated fadeIn">
-          <h1 class="title" id="time">{{ time }}</h1>
-          <h2 class="subtitle" id="welcomeMessage">{{ message }}</h2>
+          <h1 class="title" id="time" v-if="enable">{{ time }}</h1>
+          <h2 class="subtitle" id="welcomeMessage" v-if="enable">{{ message }}</h2>
         </div>
       </div>
 
       <!-- Footer -->
       <div class="hero-foot">
-        <div class="citationBox animated fadeIn" id="quotes">
+        <div class="citationBox animated fadeIn" id="quotes" v-if="enable">
           <p class="quote">{{ quote.text }}</p>
           -
           <i class="quoteCredit">{{ quote.personnage }}, {{ quote.saison }} épisode {{
-              quote.episode }}</i>
+                quote.episode }}</i>
         </div>
         <div class="creditBox" id="backgroundCredits">
           <div id="settingButton">
@@ -153,8 +153,8 @@
             <div class="field-body">
               <div class="field">
                 <div class="control">
-                  <input class="input" v-on:change="" v-bind:value="getCity()"
-                    type="text" placeholder="City" id="CityField" />
+                  <input class="input" v-on:change="" v-bind:value="getCity()" type="text" placeholder="City"
+                    id="CityField" />
                 </div>
               </div>
               <div class="field">
@@ -261,6 +261,46 @@
               <p class="help">
                 Votre nom sera affiché sur la page principale
               </p>
+            </div>
+
+            <div class="field">
+              <label class="label">Modules</label>
+              <div class="control">
+                <label class="checkbox">
+                  <input type="checkbox" v-on:change="setToogleComponent('search', $event.srcElement.checked)" v-bind:checked="getToogleComponent('search')">
+                  Recherche
+                </label>
+              </div>
+              <div class="control">
+                <label class="checkbox">
+                  <input type="checkbox" v-on:change="setToogleComponent('times', $event.srcElement.checked)" v-bind:checked="getToogleComponent('times')">
+                  Horloge
+                </label>
+              </div>
+              <div class="control">
+                <label class="checkbox">
+                  <input type="checkbox" v-on:change="setToogleComponent('welcomeMessage', $event.srcElement.checked)" v-bind:checked="getToogleComponent('welcomeMessage')">
+                  Message d'accueil
+                </label>
+              </div>
+              <div class="control">
+                <label class="checkbox">
+                  <input type="checkbox" v-on:change="setToogleComponent('weather', $event.srcElement.checked)" v-bind:checked="getToogleComponent('weather')">
+                  Météo
+                </label>
+              </div>
+              <div class="control">
+                <label class="checkbox">
+                  <input type="checkbox" v-on:change="setToogleComponent('quotes', $event.srcElement.checked)" v-bind:checked="getToogleComponent('quotes')">
+                  Citation
+                </label>
+              </div>
+              <div class="control">
+                <label class="checkbox" v-on:change="setToogleComponent('favorites', $event.srcElement.checked)" v-bind:checked="getToogleComponent('favorites')">
+                  <input type="checkbox" disabled>
+                  Favoris
+                </label>
+              </div>
             </div>
           </div>
           <div v-else></div>

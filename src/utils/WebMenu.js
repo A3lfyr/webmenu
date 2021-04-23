@@ -27,6 +27,12 @@ const WebMenu = new(class {
                 Favorites: {
                     enable: false,
                     links: [],
+                },
+                Times: {
+                    enable: true,
+                },
+                WelcomeMessage: {
+                    enable: true,
                 }
             }
         }
@@ -59,6 +65,54 @@ const WebMenu = new(class {
         this.Settings.General.username = username;
         EventManager.sendEvent(EventType.USERNAME_CHANGE, username);
         this.saveSettings();
+    }
+    setToogleComponent(component, newState) {
+        console.log("New state : " + newState)
+        switch (component) {
+            case "quotes":
+                this.Settings.Components.Quote.enable = newState;
+                vue_quotes.enable = newState;
+                break;
+            case "weather":
+                this.Settings.Components.Weather.enable = newState;
+                vue_weather.enable = newState;
+                break;
+            case "search":
+                this.Settings.Components.Search.enable = newState;
+                vue_search.enable = newState;
+                break;
+            case "favorites":
+                vue_links.enable = newState;
+                this.Settings.Components.Favorites.enable = newState;
+                break;
+            case "times":
+                vue_time.enable = newState;
+                this.Settings.Components.Times.enable = newState;
+                break;
+            case "welcomeMessage":
+                vue_welcomeMessage.enable = newState;
+                this.Settings.Components.WelcomeMessage.enable = newState;
+                break;
+        }
+        this.saveSettings();
+    }
+    getToogleComponent(component) {
+        switch (component) {
+            case "quotes":
+                return this.Settings.Components.Quote.enable;
+            case "weather":
+                return this.Settings.Components.Weather.enable;
+            case "search":
+                return this.Settings.Components.Search.enable;
+            case "favorites":
+                return this.Settings.Components.Favorites.enable;
+            case "times":
+                return this.Settings.Components.Times.enable;
+            case "welcomeMessage":
+                return this.Settings.Components.WelcomeMessage.enable;
+            default:
+                return false;
+        }
     }
     // Weather
     getCity() {

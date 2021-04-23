@@ -144,6 +144,9 @@ a:focus {
     color: #c24a16;
 }
 
+.checkbox:hover, .radio:hover {
+    color: var(--text-lighter-color);
+}
 
 
 

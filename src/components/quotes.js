@@ -1,7 +1,7 @@
-var vue_welcomeMessage = new Vue({
+var vue_quotes = new Vue({
     el: '#quotes',
     data: {
-        enable: null,
+        enable: true,
         quote: {
             text: null,
             personnage: null,
@@ -33,9 +33,13 @@ var vue_welcomeMessage = new Vue({
                     break;
             }
         },
+        Toogle: function (newState) {
+            this.enable = newState;
+        }
     },
     created() {
         this.getRandomQuote()
+        this.enable = WebMenu.getToogleComponent('quotes');
         EventManager.subscribe(this);
     }
 });

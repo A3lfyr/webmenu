@@ -71,6 +71,12 @@ var vue_settings = new Vue({
         getUsername() {
             return WebMenu.getUsername();
         },
+        setToogleComponent(component, newState) {
+            WebMenu.setToogleComponent(component, newState);
+        },
+        getToogleComponent(component) {
+            return WebMenu.getToogleComponent(component);
+        },
         // Search
         setSearchEngine(searchEngineName) {
             for (let [key, value] of Object.entries(SearchEngine)) {

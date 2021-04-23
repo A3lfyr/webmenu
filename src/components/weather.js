@@ -100,6 +100,7 @@ var vue_weather = new Vue({
     },
     created() {
         EventManager.subscribe(this);
+        this.enable = WebMenu.getToogleComponent('weather');
         this.getGPS();
         if (this.enable == true) {
             this.getWeather();

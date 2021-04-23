@@ -1,7 +1,7 @@
 var vue_welcomeMessage = new Vue({
     el: '#welcomeMessage',
     data: {
-        enable: null,
+        enable: true,
         message: null,
         username: null
     },
@@ -35,6 +35,7 @@ var vue_welcomeMessage = new Vue({
     created() {
         this.username = this.getUsername();
         this.message = this.getWelcomeMessage();
+        this.enable = WebMenu.getToogleComponent('welcomeMessage');
         EventManager.subscribe(this);
     }
 });
