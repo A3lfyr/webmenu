@@ -16,6 +16,7 @@ const WebMenu = new(class {
                 },
                 Weather: {
                     enable: true,
+                    city: null,
                     latitude: DEFAULT_LATITUDE,
                     longitude: DEFAULT_LONGITUDE
                 },
@@ -60,6 +61,14 @@ const WebMenu = new(class {
         this.saveSettings();
     }
     // Weather
+    getCity() {
+        return this.Settings.Components.Weather.city;
+    }
+    setCity(newCity) {
+        this.Settings.Components.Weather.city = newCity;
+        EventManager.sendEvent(EventType.WEATHER_CITY_CHANGE, newCity);
+        this.saveSettings();
+    }
     getGPS() {
         let gps = [this.Settings.Components.Weather.latitude, this.Settings.Components.Weather.longitude]
         return gps;

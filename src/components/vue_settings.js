@@ -1,4 +1,4 @@
-var vue_welcomeMessage = new Vue({
+var vue_settings = new Vue({
     el: '#vue_settings',
     data: {
         activePage: "Dashboard",
@@ -100,6 +100,28 @@ var vue_welcomeMessage = new Vue({
             return WebMenu.getQuoteSource().name;
         },
         // Weather
+        getCity: function () {
+            return WebMenu.getCity();
+        },
+        setCity: function (newCity) {
+            WebMenu.setCity(newCity);
+        },
+        setGPSbyCity: function (city) {
+
+        },
+        setCityByGPS: function (gps) {
+            let searchURL = "https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=" + gps[0] + "&longitude=" + gps[1]  +"&localityLanguage=fr";
+            fetch(searchURL)
+                .then(result => {
+                    return result.json();
+                })
+                .then(data => {
+                    let city = data.city + ", " + data.countryName;
+                    this.setCity(city);
+                    document.getElementById("CityField").value=city;
+                })
+                .catch(console.error)
+        },
         getLatitude: function () {
             let GPS = WebMenu.getGPS();
             let latitude = GPS[0]
@@ -114,7 +136,7 @@ var vue_welcomeMessage = new Vue({
         setLongitude: function (newLongitude) {
             WebMenu.setGPS([this.getLatitude(), newLongitude]);
         },
-        setGPSbyNavigator: function() {
+        setGPSbyNavigator: function () {
             var options = {
                 enableHighAccuracy: true,
                 timeout: 5000,
@@ -125,14 +147,16 @@ var vue_welcomeMessage = new Vue({
 
             function success(pos) {
                 var crd = pos.coords;
-                WebMenu.setGPS([crd.latitude, crd.longitude]);
+                let gps = [crd.latitude, crd.longitude]
+                WebMenu.setGPS(gps);
                 document.getElementById("latitudeField").value=crd.latitude;
                 document.getElementById("longitudeField").value=crd.longitude;
+                vue_settings.setCityByGPS(gps);
             }
 
             function error(err) {
                 console.warn(`ERREUR (${err.code}): ${err.message}`);
-              }
+            }
         },
     },
     created() {
