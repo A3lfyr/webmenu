@@ -11,7 +11,7 @@ var vue_welcomeMessage = new Vue({
     },
     methods: {
         getRandomQuote: function () {
-            fetch("https://www.kaamelott.reiter.tf/api/random")
+            fetch("https://kaamelott.reiter.tf/quote/random")
                 .then(result => {
                     return result.json();
                 })
