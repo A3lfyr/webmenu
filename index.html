@@ -219,6 +219,7 @@
                       v-bind:value="getLatitude()"
                       type="text"
                       placeholder="Latitude"
+                      id="latitudeField"
                     />
                   </div>
                 </div>
@@ -230,14 +231,16 @@
                       v-bind:value="getLongitude()"
                       type="text"
                       placeholder="Longitude"
+                      id="longitudeField"
                     />
                   </div>
                 </div>
               </div>
-              <p>
-                Par défault les coordonnées correspondent à celle de la ville de
-                Paris
-              </p>
+              <br>
+              <button
+                class="button is-primary is-small is-rounded"
+                v-on:click="setGPSbyNavigator()"
+              >Me géolocaliser</button>
             </div>
             <!-- Credits > Développement -->
             <div v-else-if="activePage === 'Développement'">

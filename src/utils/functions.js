@@ -51,3 +51,4 @@ function toogleSettings() {
         div.style.display = "block";
     }
 }
+

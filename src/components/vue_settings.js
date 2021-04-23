@@ -114,6 +114,26 @@ var vue_welcomeMessage = new Vue({
         setLongitude: function (newLongitude) {
             WebMenu.setGPS([this.getLatitude(), newLongitude]);
         },
+        setGPSbyNavigator: function() {
+            var options = {
+                enableHighAccuracy: true,
+                timeout: 5000,
+                maximumAge: 0
+            };
+              
+            navigator.geolocation.getCurrentPosition(success, error, options); 
+
+            function success(pos) {
+                var crd = pos.coords;
+                WebMenu.setGPS([crd.latitude, crd.longitude]);
+                document.getElementById("latitudeField").value=crd.latitude;
+                document.getElementById("longitudeField").value=crd.longitude;
+            }
+
+            function error(err) {
+                console.warn(`ERREUR (${err.code}): ${err.message}`);
+              }
+        },
     },
     created() {
         EventManager.subscribe(this);
