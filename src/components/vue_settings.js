@@ -116,7 +116,10 @@ var vue_settings = new Vue({
                     return result.json();
                 })
                 .then(data => {
-                    let city = data.city + ", " + data.countryName;
+                    let city = "";
+                    if(data.city != "")
+                        city = data.city + ", " 
+                    city += data.countryName
                     this.setCity(city);
                     document.getElementById("CityField").value=city;
                 })
@@ -128,13 +131,17 @@ var vue_settings = new Vue({
             return latitude;
         },
         setLatitude: function (newLatitude) {
-            WebMenu.setGPS([newLatitude, this.getLongitude()]);
+            let currentGPS = [newLatitude, this.getLongitude()];
+            vue_settings.setCityByGPS(currentGPS);
+            WebMenu.setGPS(currentGPS);
         },
         getLongitude: function () {
             return WebMenu.getGPS()[1];
         },
         setLongitude: function (newLongitude) {
-            WebMenu.setGPS([this.getLatitude(), newLongitude]);
+            let currentGPS = [this.getLatitude(), newLongitude];
+            vue_settings.setCityByGPS(currentGPS);
+            WebMenu.setGPS(currentGPS);
         },
         setGPSbyNavigator: function () {
             var options = {
