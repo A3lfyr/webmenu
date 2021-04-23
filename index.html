@@ -157,6 +157,11 @@
                     type="text" placeholder="City" id="CityField" />
                 </div>
               </div>
+              <div class="field">
+                <button class="button" v-on:click="setGPSbyCity()">
+                  <i class="fas fa-search"></i>
+                </button>
+              </div>
             </div>
             <p class="is-small is-center">ou</p>
             <button class="button is-primary is-small is-rounded" v-on:click="setGPSbyNavigator()">
@@ -200,8 +205,12 @@
                 <a target="_blank" href="https://www.infoclimat.fr/">infoclimat</a>
               </li>
               <li>
-                Association GPS > Ville :
+                GPS => Ville :
                 <a target="_blank" href="https://www.bigdatacloud.com/">BigDataCloud Geocoding</a>
+              </li>
+              <li>
+                Ville => GPS:
+                <a target="_blank" href="https://geocode.xyz/">Geocode.xyz</a>
               </li>
               <li>
                 Fond d'écran :

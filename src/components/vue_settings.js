@@ -106,8 +106,27 @@ var vue_settings = new Vue({
         setCity: function (newCity) {
             WebMenu.setCity(newCity);
         },
-        setGPSbyCity: function (city) {
+        setGPSbyCity: function () {
+            let searchCity = document.getElementById("CityField").value
+            let searchURL = "https://geocode.xyz/" + searchCity  +"?json=1";
+            fetch(searchURL)
+                .then(result => {
+                    return result.json();
+                })
+                .then(data => {
+                    let city = "";
+                    if(data.city != "")
+                        city = data.standard.city + ", " 
+                    city += data.standard.countryname
+                    this.setCity(city);
+                    document.getElementById("CityField").value=city;
 
+                    let gps = [data.latt, data.longt];
+                    WebMenu.setGPS(gps)
+                    document.getElementById("latitudeField").value=data.latt;
+                    document.getElementById("longitudeField").value=data.longt;
+                })
+                .catch(console.error)
         },
         setCityByGPS: function (gps) {
             let searchURL = "https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=" + gps[0] + "&longitude=" + gps[1]  +"&localityLanguage=fr";
