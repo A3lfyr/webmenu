@@ -1,7 +1,7 @@
 var vue_background = new Vue({
     el: '#backgroundCredits',
     data: {
-        backgroundImage: {
+        currentBackgroundImage: {
             url: null,
             link: null,
             author: null
@@ -12,9 +12,9 @@ var vue_background = new Vue({
         getBackgroundImage: function () {
             if (sessionStorage["bg_url"] !== undefined && sessionStorage["bg_link"] !== undefined && sessionStorage["bg_author"] !== undefined) {
 
-                this.backgroundImage.url = sessionStorage["bg_url"];
-                this.backgroundImage.link = sessionStorage["bg_link"];
-                this.backgroundImage.author = sessionStorage["bg_author"];
+                this.currentBackgroundImage.url = sessionStorage["bg_url"];
+                this.currentBackgroundImage.link = sessionStorage["bg_link"];
+                this.currentBackgroundImage.author = sessionStorage["bg_author"];
                 this.changeBackground();
             } else {
                 fetch("/src/utils/backgrounds.json")
@@ -30,12 +30,12 @@ var vue_background = new Vue({
                         console.log("Background Choose : ");
                         console.log(randomBackground);
 
-                        this.backgroundImage.url = randomBackground.url;
-                        this.backgroundImage.link = randomBackground.link;
-                        this.backgroundImage.author = randomBackground.user;
-                        sessionStorage["bg_url"] = this.backgroundImage.url;
-                        sessionStorage["bg_link"] = this.backgroundImage.link;
-                        sessionStorage["bg_author"] = this.backgroundImage.author;
+                        this.currentBackgroundImage.url = randomBackground.url;
+                        this.currentBackgroundImage.link = randomBackground.link;
+                        this.currentBackgroundImage.author = randomBackground.user;
+                        sessionStorage["bg_url"] = this.currentBackgroundImage.url;
+                        sessionStorage["bg_link"] = this.currentBackgroundImage.link;
+                        sessionStorage["bg_author"] = this.currentBackgroundImage.author;
                         this.changeBackground();
                     })
                     .catch(console.error)
@@ -43,7 +43,7 @@ var vue_background = new Vue({
 
         },
         changeBackground: function () {
-            document.getElementById("main").style.background = "url(" + this.backgroundImage.url + ") no-repeat center fixed";
+            document.getElementById("main").style.background = "url(" + this.currentBackgroundImage.url + ") no-repeat center fixed";
             document.getElementById("main").style.backgroundSize = "cover";
         },
         onEvent: function (type, data) {
@@ -58,6 +58,9 @@ var vue_background = new Vue({
             sessionStorage.clear();
             document.location.reload(true);
         },
+        loadAllBackgrounds: function () {
+
+        }
     },
     created() {
         this.getBackgroundImage();
