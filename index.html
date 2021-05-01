@@ -87,10 +87,10 @@
             <i class="fas fa-cog" onclick="toogleSettings()" id="optionCog"></i><br />
           </div>
           Photo par
-          <a target="_blank" v-bind:href="backgroundImage.link">{{ backgroundImage.author }}</a>
+          <a target="_blank" v-bind:href="currentBackgroundImage.link">{{ currentBackgroundImage.author }}</a>
           /
           <a target="_blank"
-            href="https://unsplash.com/?utm_source=urn:ietf:wg:oauth:2.0:oob&utm_medium=referral">Unsplash</a>
+            v-bind:href="currentBackgroundImage.siteurl">{{currentBackgroundImage.site}}</a>
         </div>
         <div class="rightBox"></div>
       </div>
@@ -120,8 +120,20 @@
           <!-- Apparence > Background -->
           <div v-if="activePage === 'Background'">
             <button class="button is-danger is-small is-rounded" onclick="WebMenu.refreshBackground()">
-              Charger un nouveau background
+              Fond d'écran aléatoire
             </button>
+
+            <div class="columns is-multiline mt-4 is-variable is-3">
+              <div class="column is-one-quarter card m-1" style="padding:2px; " v-for="(bg, index) in backgroundList">
+                <div class="card-image" v-on:click="setBackground(index)">
+                  <figure class="image is-16by9">
+                    <img v-bind:src="bg.url" v-bind:alt="bg.user + ' image'">
+                  </figure>
+                </div>
+              </div>
+            </div>
+
+
           </div>
           <!-- Modules > Favoris -->
           <div v-else-if="activePage === 'Favoris'">
@@ -215,6 +227,8 @@
               <li>
                 Fond d'écran :
                 <a target="_blank" href="https://unsplash.com/">Unsplash</a>
+                &
+                <a target="_blank" href="https://www.pexels.com/">Pexel</a>
               </li>
               <li>
                 Citations de Kaamelott :
@@ -325,10 +339,10 @@
   </script>
 
   <!-- Import Vues -->
+  <script src="src/components/background.js"></script>
   <script src="src/components/links.js"></script>
   <script src="src/components/weather.js"></script>
   <script src="src/components/quotes.js"></script>
-  <script src="src/components/background.js"></script>
   <script src="src/components/time.js"></script>
   <script src="src/components/vue_showWelcomeMessage.js"></script>
   <script src="src/components/search.js"></script>
