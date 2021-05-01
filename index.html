@@ -90,7 +90,7 @@
           <a target="_blank" v-bind:href="currentBackgroundImage.link">{{ currentBackgroundImage.author }}</a>
           /
           <a target="_blank"
-            href="https://unsplash.com/?utm_source=urn:ietf:wg:oauth:2.0:oob&utm_medium=referral">Unsplash</a>
+            v-bind:href="currentBackgroundImage.siteurl">{{currentBackgroundImage.site}}</a>
         </div>
         <div class="rightBox"></div>
       </div>
@@ -120,7 +120,7 @@
           <!-- Apparence > Background -->
           <div v-if="activePage === 'Background'">
             <button class="button is-danger is-small is-rounded" onclick="WebMenu.refreshBackground()">
-              Charger un nouveau background
+              Fond d'écran aléatoire
             </button>
 
             <div class="columns is-multiline mt-4 is-variable is-3">
@@ -227,6 +227,8 @@
               <li>
                 Fond d'écran :
                 <a target="_blank" href="https://unsplash.com/">Unsplash</a>
+                &
+                <a target="_blank" href="https://www.pexels.com/">Pexel</a>
               </li>
               <li>
                 Citations de Kaamelott :
