@@ -17,18 +17,13 @@ Vous pouvez accéder au service via l'URL http://webmenu.reiter.tf ou en clonant
 - Affichage de la météo localisée avec des coordonnées GPS
 - Affichage de citation de Kaamelott
 - Module de recherche via plusieurs moteurs de recherche disponible
-- Fond d'écran aléatoire
+- Fond d'écran parmis une liste prédéfinie
 - Suppression des données locales
 
 ## Prochainement
 
-- Activation/désactivation du module Météo
-- Activation/désactivation du module de citation
-- Activation/désactivation du module de recherche
-- Activation/désactivation du message d'accueil
-- Activation/désactivation de l'affichage de l'heure
 - Ajout de plus de sources de citation
-- Ajout du choix de fond d'écran parmi une liste
+- Ajout d'un plus grand choix de fond d'écran
 - Traduction en anglais et choix de la langue
 - Accès via une extension chrome
 
@@ -36,7 +31,7 @@ Vous pouvez accéder au service via l'URL http://webmenu.reiter.tf ou en clonant
 
 Vous pouvez contribuer au projet en m'aidant à développer les prochaines fonctionnalités (via un fork par exemple) ou simplement en rapportant les bugs/problème que vous avez trouvé.
 
-### J'aimerais exposer mes photo en fond d'écran
+### J'aimerais exposer mes photo en fond d'écran, comment faire ?
 
 Si votre photographie s'adapte bien avec le design de la page vous pouvez proposer son intégration.
 
