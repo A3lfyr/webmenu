@@ -27,7 +27,8 @@ var vue_settings = new Vue({
                 ]
             }
 
-        ]
+        ],
+        backgroundList: [],
     },
     methods: {
         changeActivePage: function (newPageName) {
@@ -190,9 +191,14 @@ var vue_settings = new Vue({
                 console.warn(`ERREUR (${err.code}): ${err.message}`);
             }
         },
+        //Background
+        setBackground: function(id) {
+            vue_background.setBackground(id);
+        }
     },
     created() {
         EventManager.subscribe(this);
+        this.backgroundList = vue_background.getAllBackgrounds();
         this.activePage = "Dashboard";
     }
 });
