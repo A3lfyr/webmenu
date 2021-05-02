@@ -280,40 +280,46 @@
             <div class="field">
               <label class="label">Modules</label>
               <div class="control">
-                <label class="checkbox">
+                <label class="switch">
                   <input type="checkbox" v-on:change="setToogleComponent('search', $event.srcElement.checked)" v-bind:checked="getToogleComponent('search')">
-                  Recherche
+                  <span class="slider round"></span>
                 </label>
+                Recherche
               </div>
               <div class="control">
-                <label class="checkbox">
+                <label class="switch">
                   <input type="checkbox" v-on:change="setToogleComponent('times', $event.srcElement.checked)" v-bind:checked="getToogleComponent('times')">
-                  Horloge
+                  <span class="slider round"></span>
                 </label>
+                Horloge
               </div>
               <div class="control">
-                <label class="checkbox">
+                <label class="switch">
                   <input type="checkbox" v-on:change="setToogleComponent('welcomeMessage', $event.srcElement.checked)" v-bind:checked="getToogleComponent('welcomeMessage')">
-                  Message d'accueil
+                  <span class="slider round"></span>
                 </label>
+                Message d'accueil
               </div>
               <div class="control">
-                <label class="checkbox">
+                <label class="switch">
                   <input type="checkbox" v-on:change="setToogleComponent('weather', $event.srcElement.checked)" v-bind:checked="getToogleComponent('weather')">
-                  Météo
+                  <span class="slider round"></span>
                 </label>
+                Météo
               </div>
               <div class="control">
-                <label class="checkbox">
+                <label class="switch">
                   <input type="checkbox" v-on:change="setToogleComponent('quotes', $event.srcElement.checked)" v-bind:checked="getToogleComponent('quotes')">
-                  Citation
+                  <span class="slider round"></span>
                 </label>
+                Citation
               </div>
               <div class="control">
-                <label class="checkbox" v-on:change="setToogleComponent('favorites', $event.srcElement.checked)" v-bind:checked="getToogleComponent('favorites')">
+                <label class="switch" v-on:change="setToogleComponent('favorites', $event.srcElement.checked)" v-bind:checked="getToogleComponent('favorites')">
                   <input type="checkbox" disabled>
-                  Favoris
+                  <span class="slider round"></span>
                 </label>
+                Favoris
               </div>
             </div>
           </div>
