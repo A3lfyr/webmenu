@@ -1,11 +1,11 @@
 <template>
-  <p v-if="currentBackground.link != '' && currentBackground.author != ''">
+  <span v-if="currentBackground.link != '' && currentBackground.author != ''">
     Photo par <a target="_blank" v-bind:href="currentBackground.link">{{ currentBackground.author }}</a> 
 
     <span v-if="currentBackground.site != '' && currentBackground.siteurl != ''">
       / <a target="_blank" v-bind:href="currentBackground.siteurl">{{currentBackground.site}}</a>
     </span>
-  </p>
+  </span>
 </template>
 
 <script>
@@ -91,7 +91,7 @@ export default {
 </script>
 
 <style scope>
-  a, p {
+  a, span {
     transition-duration: 0.2s;
     color: var(--text-darker);
     text-decoration: none;

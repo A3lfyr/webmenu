@@ -23,7 +23,7 @@
       <Background />
     </aside>
 
-    <aside class="center upped">
+    <aside class="center">
       <Quotes />
     </aside>
 
@@ -71,12 +71,12 @@
     min-height: 100vh;
     flex-direction: column;
     margin: 0;
-    padding: 1vh;
   }
 
   header, footer, aside {
     display: flex;
     flex: 1;
+    padding: 1vh;
   }
 
   header {
@@ -102,12 +102,18 @@
     align-items: flex-end;
   }
 
+  footer > aside {
+    flex: 1;
+    flex-direction: column;
+  }
+
   .left {
     justify-content:flex-start;
   }
 
   .center {
     justify-content:center;
+    align-items: center;
   }
 
   .right {
@@ -117,12 +123,12 @@
   .main {
     display: flex;
     flex: 3;
-    flex-flow: column wrap;
+    flex-direction: column;
     justify-content:center;
     align-items: center;
   }
 
-  .upped {
+  footer > .center {
     padding-bottom: 5vh;
   }
 </style>
