@@ -1,5 +1,11 @@
 <template>
-  Photo par <a target="_blank" v-bind:href="currentBackground.link">{{ currentBackground.author }}</a> / <a target="_blank" v-bind:href="currentBackground.siteurl">{{currentBackground.site}}</a>
+  <p v-if="currentBackground.link != '' && currentBackground.author != ''">
+    Photo par <a target="_blank" v-bind:href="currentBackground.link">{{ currentBackground.author }}</a> 
+
+    <span v-if="currentBackground.site != '' && currentBackground.siteurl != ''">
+      / <a target="_blank" v-bind:href="currentBackground.siteurl">{{currentBackground.site}}</a>
+    </span>
+  </p>
 </template>
 
 <script>
@@ -85,4 +91,12 @@ export default {
 </script>
 
 <style scope>
+  a, p {
+    transition-duration: 0.2s;
+    color: var(--text-darker);
+    text-decoration: none;
+  }
+  a:hover {
+    color: var(--text);
+  }
 </style>
