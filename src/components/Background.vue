@@ -90,11 +90,12 @@ export default {
 }
 </script>
 
-<style scope>
+<style scoped>
   a, span {
     transition-duration: 0.2s;
-    color: var(--text-darker);
     text-decoration: none;
+    color: var(--text-darker);
+    font-size: 0.8rem;
   }
   a:hover {
     color: var(--text);
