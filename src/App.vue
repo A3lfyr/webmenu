@@ -55,7 +55,11 @@
   }
 </script>
 
-<style scope>
+<style>
+  @import "./assets/css/colors.css";
+  @import "./assets/css/style.css";
+
+
   #app {
     margin: 0;
     padding: 0;
