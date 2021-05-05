@@ -1,0 +1,10 @@
+:root {
+    --bg: rgba(15, 28, 45, 0.925);
+    --bg-lighter: rgba(27, 51, 83, 0.750);
+
+    --text: #F8F9FA;
+    --text-lighter: #FCFDFF;
+    --text-darker: #C5C6C6;
+
+    --primary: #f07d1b
+}

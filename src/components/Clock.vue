@@ -1,5 +1,5 @@
 <template>
-  <p>Clock</p>
+  <span>Clock</span>
 </template>
 
 <script>

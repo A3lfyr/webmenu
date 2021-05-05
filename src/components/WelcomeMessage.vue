@@ -1,3 +1,3 @@
 <template>
-  <p>WelcomeMessage</p>
+  <span>WelcomeMessage</span>
 </template>

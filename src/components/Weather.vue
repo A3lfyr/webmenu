@@ -1,3 +1,3 @@
 <template>
-  <p>Weather</p>
+  <span>Weather</span>
 </template>

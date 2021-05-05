@@ -1,3 +1,3 @@
 <template>
-  <p>Quotes</p>
+  <span>Quotes</span>
 </template>

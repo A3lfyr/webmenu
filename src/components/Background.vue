@@ -1,58 +1,105 @@
+<template>
+  <span v-if="currentBackground.link != '' && currentBackground.author != ''">
+    Photo par <a target="_blank" v-bind:href="currentBackground.link">{{ currentBackground.author }}</a> 
+
+    <span v-if="currentBackground.site != '' && currentBackground.siteurl != ''">
+      / <a target="_blank" v-bind:href="currentBackground.siteurl">{{currentBackground.site}}</a>
+    </span>
+  </span>
+</template>
+
 <script>
+import backgrounds from '../assets/backgrounds.json'
 export default {
   name: 'Background',
   data() {
     return {
-      currentBackgroundImage: {
-            url: null,
-            link: null,
-            author: null,
-            site: null,
-            siteurl: null
-        },
-        theme: null,
-        backgrounds: [
-            {
-            "url": "https://images.pexels.com/photos/1072179/pexels-photo-1072179.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-            "link": "https://www.pexels.com/fr-fr/photo/feuilles-vertes-1072179/",
-            "user": "Cátia Matos",
-            "site": "Pexel",
-            "siteurl": "https://www.pexels.com/"
-            }
-        ],
+      background_source: 0, // 0 => Random from the default list | 1 => Fixed from default list | 2 => Uploaded
+      backgroundId: null, // The id of the backgroud in the default backgrounds list if the user choose one
+      currentBackground: { // Data from the current loaded background
+        url: null,
+        link: null,
+        author: null,
+        site: null,
+        siteurl: null
+      }
     };
   },
   methods: {
-    setBackground: function(id) {
-        let bg = this.backgrounds[id];
-        console.log("Background Choose : ");
-        console.log(bg);
+    /**
+     * Set a background from an ID 
+     * in the default background list
+     */
+    setBackgroundFromId: function(id) {
+        let bg = backgrounds[id];
 
-        this.currentBackgroundImage.url = bg.url;
-        this.currentBackgroundImage.link = bg.link;
-        this.currentBackgroundImage.author = bg.user;
-        this.currentBackgroundImage.site = bg.site;
-        this.currentBackgroundImage.siteurl = bg.siteurl;
-        sessionStorage["bg_url"] = this.currentBackgroundImage.url;
-        sessionStorage["bg_link"] = this.currentBackgroundImage.link;
-        sessionStorage["bg_author"] = this.currentBackgroundImage.author;
-        sessionStorage["site"] = this.currentBackgroundImage.site;
-        sessionStorage["siteurl"] = this.currentBackgroundImage.siteurl;
-
-        this.applyBackground();
+        this.currentBackground.url = bg.url;
+        this.currentBackground.link = bg.link;
+        this.currentBackground.author = bg.user;
+        this.currentBackground.site = bg.site;
+        this.currentBackground.siteurl = bg.siteurl;
+        sessionStorage["bg_url"] = this.currentBackground.url;
+        sessionStorage["bg_link"] = this.currentBackground.link;
+        sessionStorage["bg_author"] = this.currentBackground.author;
+        sessionStorage["site"] = this.currentBackground.site;
+        sessionStorage["siteurl"] = this.currentBackground.siteurl;
     },
+    /**
+     * Apply the background stored in 
+     * currentBackground to the HTML DOM
+     */
     applyBackground: function () {
-        document.getElementById("app").style.background = "url(" + this.currentBackgroundImage.url + ") no-repeat center fixed";
+        document.getElementById("app").style.background = "url(" + this.currentBackground.url + ") no-repeat center fixed";
         document.getElementById("app").style.backgroundSize = "cover";
     },
+    /**
+     * Get a random background ID from the
+     * default background list
+     */
+    getRandomIdFromDefaultList: function() {
+      let nbBackgroundsInList = backgrounds.length;
+      let randomID = Math.floor(Math.random() * nbBackgroundsInList);
+      return randomID;
+    },
+    loadSessionStorageBackground: function() {
+      this.currentBackground.url = sessionStorage["bg_url"];
+      this.currentBackground.link = sessionStorage["bg_link"];
+      this.currentBackground.author = sessionStorage["bg_author"];
+      this.currentBackground.site = sessionStorage["site"];
+      this.currentBackground.siteurl = sessionStorage["siteurl"]; 
+    }
   },
   created() {
-    this.setBackground(0);
-        console.log(this.backgrounds)
+    switch (this.background_source) {
+      case 0: // Random from the default list
+        if (sessionStorage["bg_url"] !== undefined) {
+          this.loadSessionStorageBackground();
+        } else {
+          this.setBackgroundFromId(this.getRandomIdFromDefaultList())
+        }
+        break;
+
+      case 1: // Fixed from default list
+        this.setBackgroundFromId(this.backgroundId);
+        break; 
+
+      case 2: // Uploaded
+        //TODO make functions for upload a background
+        break; 
+    }
+    this.applyBackground();
   }
 }
 </script>
 
 <style scoped>
-
+  a, span {
+    transition-duration: 0.2s;
+    text-decoration: none;
+    color: var(--text-darker);
+    font-size: 0.8rem;
+  }
+  a:hover {
+    color: var(--text);
+  }
 </style>
